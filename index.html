@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Presentación</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<style>
+			.primera #text_comun{
+				display: none
+			}
+			.footer{
+				position:fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				text-align:left;
+				padding: 10px;
+			}
+			.header {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				text-align: left;
+				padding: 10px 20px;
+				font-weight: bold;
+				/*font-size: 20px;
+				z-index: 1000;*/
+				display: none;
+			}
+			.barra-contenedor {
+				width: 100%;
+				height: 4px;
+				background-color: #ddd;
+				margin-top: 4px;
+				overflow: hidden;
+				border-radius: 2px;
+			}
+			.barra-progreso {
+				height: 100%;
+				background-color: #007bff;
+				width: 0%;
+				transition: width 1s ease;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<div id="cabecera" class="header" style="display: none;"><small></small>
+					<div class="barra-contenedor">
+    					<div class="barra-progreso"></div>
+  					</div>
+				</div>
+				<div id="text_comun" class="footer"><small>Texto</small></div>
+				<section data-state="primera" data-background="img/imagen.jpg" data-background-size="cover" data-background-opacity="0.6" > <!--data-background-color="rgba(0,0,0,0.5)"-->
+					<h2>Titulo de Presentación</h2>
+					<h3>Sub Titulo</h3>
+					<small>Presentado por: xxxx</small>
+				</section>
+				<section data-background="img/indice.jpg" data-background-size="50%" data-background-position="left center">
+					<h3>Índice</h3>
+					<ul>
+						<li>Contenido 1</li>
+						<li>Contenido 2</li>
+						<li>Contenido 3</li>
+						<li>Contenido 4</li>
+					</ul>
+				</section>
+				<section data-background="img/imagen7.jpg" data-background-size="cover" data-background-opacity="0.6" >
+					<h3>Introducción</h3>
+				</section>
+				<section data-cabecera="Introducción" data-progreso="100">
+					<p>xxxxx</p>
+					<p>xxxxx</p>
+					<p>xxxxx</p>
+				</section>
+				<section data-background="img/imagen3.jpg" data-background-size="cover" data-background-opacity="0.6">
+					<h3>Contenido 1</h3>
+				</section>
+				<section data-cabecera="Contenido 1" data-progreso="100">
+					<p>xxxxx</p>
+					<p>xxxxx</p>
+					<p>xxxxx</p>
+				</section>
+				<section data-background="img/imagen6.jpg" data-background-size="cover" data-background-opacity="0.6">
+					<h3>Contenido 2</h3>
+				</section>
+				<section data-cabecera="Contenido 2" data-progreso="100">
+					<p>xxxxx</p>
+					<p>xxxxx</p>
+					<p>xxxxx</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: false,
+				center: true,
+				
+				transition: 'slide',  //none/fade/slide/convex/concave/zoom
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+
+			Reveal.on('slidechanged', event => {
+				const cabecera = document.getElementById('cabecera');
+				const texto = event.currentSlide.dataset.cabecera;
+				const progreso = event.currentSlide.dataset.progreso;
+
+				if (texto) {
+					cabecera.style.display = 'block';
+					cabecera.querySelector('small').textContent = texto;
+
+					// Controlar barra de progreso
+					const barra = cabecera.querySelector('.barra-progreso');
+					if (progreso) {
+						barra.style.width = progreso + '%';
+					} else {
+						barra.style.width = '0%'; // Por defecto
+					}
+
+				}else {
+					cabecera.style.display = 'none';
+				}
+				
+			});
+		</script>
+		
+	</body>
+</html>
